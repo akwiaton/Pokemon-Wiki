@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
     <title>Pokedex</title>
 </head>
 <body onload="init()">
-    <div class="pokemon_gallery d-none" id="pokemon_gallery">
-        <div id="content">  
+    <header>
+        <img class="pokedex_logo" src="./img/favicon.png">
+        <h1>Pokemon Wiki</h1>
+    </header>
+    <div class="pokemon_gallery" id="pokemon_gallery">
+        <div id="gallery_content">  
         </div>
     </div>
 
 
 
-    <div class="pokemon_big_card" id="pokemon_big_card">
+    <div class="pokemon_big_card d-none" id="pokemon_big_card">
     <div id="pokedex">
         <h1 id="pokemonName">Name</h1>
-
+        <p class="pokemonType" id="pokemonType">typ</p>
+        <p class="pokemonType" id="pokemonUndertype">untertyp</p>
     </div>
     <div class="info_container">
         <img id="pokemon_img" alt="Pokemon">

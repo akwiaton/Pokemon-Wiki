@@ -8,7 +8,7 @@ function renderChart() {
     labels: ['hd', 'attack', 'defense', 'sp-attac', 'sp-defense', 'speed'],
     datasets: [{
       axis: 'y',
-      label: 'Base Status',
+      label: `Pokemon Stats`,
       data: pokemonPower,
       fill: false,
       backgroundColor: [
