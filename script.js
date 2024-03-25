@@ -40,8 +40,25 @@ async function loadChart() {
     }
 }
 
+function showGallery() {
+    document.getElementById('pokemon_big_card').classList.add('d-none');
+    document.getElementById('pokemon_gallery').classList.remove('d-none');
+}
+
+function  hideGallery() {
+    document.getElementById('pokemon_big_card').classList.remove('d-none' );
+    document.getElementById('pokemon_gallery') .classList.add('d-none');
+}
+
+async function loadSmallCard() {
+    loadPokemon();
+    renderPokemonInfo();
+    // hintergrundfarbe
+    // eigenschaften
+}
 function renderPokemonGallery() {
     let pokemoncards = document.getElementById('content').innerHTML;
+    pokemoncards.innerHTML = '';
     pokemoncards.innerHTML = `
     <h2>${currentPokemon['name']}</h2>
     <p>fire</p>
@@ -50,6 +67,3 @@ function renderPokemonGallery() {
     `;
 }
 
-// function loadPokemon2() {
-//     let url = `https://pokeapi.co/api/v2/ability/${name}`;
-// }
