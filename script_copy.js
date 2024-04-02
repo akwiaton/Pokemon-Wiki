@@ -73,12 +73,13 @@ async function loadPokemon(i) {
 
   console.log(responseJSON);
 
-  pokemonPower = []; // load first 6 values from array
   for (let j = 0; j < statsnumber.length; j++) {
     let stat = baseStat[statsnumber[j]]["base_stat"];
     pokemonPower.push(stat);
+    // pokemonPower.slice(0 ,6);
   }
   renderPokemonInfo(i, responseJSON, pokemonTypes, pokemonName);
+
 }
 
 function renderPokemonInfo(i, responseJSON, pokemonTypes, pokemonName) {
@@ -86,48 +87,39 @@ function renderPokemonInfo(i, responseJSON, pokemonTypes, pokemonName) {
   let modalContent = document.getElementById("modal-content");
   modalContent.innerHTML = "";
   modalBg.style.display = "block";
-  modalContent.innerHTML = displayHTML(
-    i,
-    responseJSON,
-    pokemonTypes,
-    pokemonName
-  );
+  modalContent.innerHTML = /*html*/ `
+    <div class="main_container">
+        <img class="icon" src="./img/left.png" onclick= "previousCard(${i})"/>
+        <div id="container" style="background-color:${
+          colors[pokemonTypes[0].type.name]
+        }">
+            <h3 id="pokemonName">${responseJSON["name"]}</h3>
+            <div class="img_container">
+                <img id="pokemon_img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${[
+                  i,
+                ]}.svg">
+            </div>
+            <div class="type_container">
+            <p id="pokemonType${i}" class="pokemonType"></p>
+            </div>
+        
+            <div class="info_container">
+                <div id="chart_container"> 
+                <canvas id="pokemonChart${i}"></canvas>
+                </div>
+            </div>
+        </div>
+        <img class="icon" src="./img/right.png" onclick="nextCard(${i})">
+    </div>
+   `;
   let typeContent = document.getElementById(`pokemonType${i}`);
   for (let j = 0; j < pokemonTypes.length; j++) {
     const type = pokemonTypes[j]["type"]["name"];
     typeContent.innerHTML += `
-     <p id="typeColor">${type}</p>
-     `;
+        <p id="typeColor">${type}</p>
+        `;
   }
   closeBigCard(modalBg);
-}
-
-function displayHTML(i, responseJSON, pokemonTypes, pokemonName) {
-  return /*html*/ `
- <div class="main_container">
-     <img class="icon left" src="./img/left.png" onclick= "previousCard(${i})"/>
-     <div id="container" style="background-color:${
-       colors[pokemonTypes[0].type.name]
-     }">
-         <h3 id="pokemonName">${responseJSON["name"]}</h3>
-         <div class="img_container">
-             <img id="pokemon_img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${[
-               i,
-             ]}.svg">
-         </div>
-         <div class="type_container">
-         <p id="pokemonType${i}" class="pokemonType"></p>
-         </div>
-     
-         <div class="info_container">
-             <div id="chart_container"> 
-             <canvas id="pokemonChart${i}"></canvas>
-             </div>
-         </div>
-     </div>
-     <img class="icon right" src="./img/right.png" onclick="nextCard(${i})">
- </div>
-`;
 }
 
 function closeBigCard(modalBg) {
@@ -137,6 +129,14 @@ function closeBigCard(modalBg) {
     }
   };
 }
+
+// function nextCard(i) {
+//     let index = i+1;
+//     if(i===currentPokemonIndex -1) {
+//       index = 0;
+//     }
+//     displayBigCard(index);
+//   }
 
 function nextCard(i) {
   if (i == currentPokemonIndex.length - 1) {
@@ -165,17 +165,30 @@ async function loadMorePokemon() {
   currentPokemonIndex += 20;
 }
 
+// function showPokemonNames() {
+//   document.getElementById("pokemon_gallery").classList.add("d-none");
+//   let pokeSearchResults = document.getElementById("search_container");
+//   pokeSearchResults.innerHTML = "";
+
+//   for (let i = 0; i < pokemonNames.length; i++) {
+//     let searchName = pokemonNames[i];
+//     pokeSearchResults.innerHTML += `<li>${searchName}</li>`;
+//   }
+// }
+
 function searchPokemon() {
   let search = document.getElementById("search").value;
   search = search.toLowerCase();
   console.log(search);
 
   let searchPokemon = document.getElementsByClassName("pokemon_small_card");
+  //   let searchResult =  document.getElementById('search_container');
   for (let i = 0; i < searchPokemon.length; i++) {
     let searchName = pokemonNames[i];
 
     if (searchName.toLowerCase().includes(search)) {
       searchPokemon[i].style.display = "block";
+      //   pokeSearchResults.innerHTML += `<li>${searchName}</li>`;
     } else {
       searchPokemon[i].style.display = "none";
     }

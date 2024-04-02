@@ -1,6 +1,6 @@
-function renderChart() {
+function renderChart(i, pokemonPower) {
 
-    const ctx = document.getElementById('pokemonChart');
+    const ctx = document.getElementById(`pokemonChart${i}`);
     
       new Chart(ctx, {
         type: 'bar',
@@ -34,6 +34,4 @@ function renderChart() {
     indexAxis: 'y',
   }
 });
-
-
       }

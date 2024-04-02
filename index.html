@@ -13,31 +13,25 @@
     <header>
         <img class="pokedex_logo" src="./img/favicon.png">
         <h1>Pokemon Wiki</h1>
+        <input name id="search" type="text" placeholder="z.B. Pikachu" onkeydown="searchPokemon()" >
     </header>
+
+    <div id="search_container"></div>
+
     <div class="pokemon_gallery" id="pokemon_gallery">
-        <div id="gallery_content">  
+        <div id="gallery_content">
+        </div>
+            <div class="container_btn">
+                <button class="btn_load_more" onclick="loadMorePokemon()">Load More Pokemon</button>
+            </div>
         </div>
     </div>
 
-
-
-    <div class="pokemon_big_card d-none" id="pokemon_big_card">
-    <div id="pokedex">
-        <h1 id="pokemonName">Name</h1>
-        <p class="pokemonType" id="pokemonType">typ</p>
-        <p class="pokemonType" id="pokemonUndertype">untertyp</p>
+    <div id="modal-bg" class="modal-bg">
+        <div id="modal-content" class="modal-content">
+            
+        </div>
     </div>
-    <div class="info_container">
-        <img id="pokemon_img" alt="Pokemon">
-
-    </div>
-    <div>
-        <div>
-            <div id="chart_container"> </div>
-            <canvas id="pokemonChart"></canvas>
-          </div>
-    </div>
-</div>
     <script src="script.js" ></script>
     <script src="chart.js"></script>
     
