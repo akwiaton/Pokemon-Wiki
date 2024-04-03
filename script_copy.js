@@ -194,3 +194,27 @@ function searchPokemon() {
     }
   }
 }
+async function searchPokemon() {
+    let search = document.getElementById("search").value;
+    search = search.toLowerCase();
+    console.log(search);
+  
+    let searchLocation = pokemons[0];
+  
+  if (search.length >= 3) {
+  
+      document.getElementById('search_container').innerHTML = '';
+      pokemonNames = [];
+      for (let index = 0; index < searchLocation.length; index++) {
+          let element = searchLocation[index];
+          let elementName = element.name;
+          if (elementName.toLowerCase().includes(search)) {
+              pokemonNames.push(element);
+          }         
+      }
+      await loadPokemonInfoCardSmall(pokemonNames);
+  } else { pokemonNames = [];
+      await loadPokemonInfoCardSmall(currentPokemonIndex);
+  
+  }
+  }

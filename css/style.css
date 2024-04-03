@@ -7,11 +7,12 @@ body {
     font-weight: 300;
     background: rgba(0, 0, 0, 0.1);
 }
-header {
+.headline {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
+    cursor: pointer;
 }
 .pokedex_logo {
     height: 40px;
@@ -55,6 +56,7 @@ header {
 }
 #gallery_content {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 4px;
 }
@@ -192,6 +194,14 @@ input {
     .modal-content {
     padding: 0;
     width: auto;
+    }
+}
+@media (max-width: 349px) {
+    #chart_container {
+        width: 310px;
+    }
+    #pokemonChart {
+        width: 310px;
     }
 }
 

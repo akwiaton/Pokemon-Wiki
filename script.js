@@ -49,9 +49,7 @@ async function renderPokemonCardSmall(i, currentPokemon, pokemonTypes) {
   let pokemoncards = document.getElementById("gallery_content");
   pokemoncards.innerHTML += /*html*/ `
         <div class="small_card_gallery">
-        <div class="pokemon_small_card" onclick=" displayBigCard(${i})" style="background-color:${
-    colors[pokemonTypes[0].type.name]
-  }">
+        <div class="pokemon_small_card" onclick=" displayBigCard(${i})" style="background-color:${colors[pokemonTypes[0].type.name]}">
             <h3>${currentPokemon["name"]}</h3>
             <p class="pokemonTypeSmall">${pokemonTypes["0"]["type"]["name"]}</p>
             <div class="card_container">
@@ -70,9 +68,6 @@ async function loadPokemon(i) {
   let pokemonTypes = responseJSON["types"];
   let pokemonName = responseJSON["name"];
   let baseStat = responseJSON["stats"]; // ist ein array mit 6 Werten [39, 52, 43, 60, 50, 65]
-
-  console.log(responseJSON);
-
   pokemonPower = []; // load first 6 values from array
   for (let j = 0; j < statsnumber.length; j++) {
     let stat = baseStat[statsnumber[j]]["base_stat"];
@@ -86,12 +81,7 @@ function renderPokemonInfo(i, responseJSON, pokemonTypes, pokemonName) {
   let modalContent = document.getElementById("modal-content");
   modalContent.innerHTML = "";
   modalBg.style.display = "block";
-  modalContent.innerHTML = displayHTML(
-    i,
-    responseJSON,
-    pokemonTypes,
-    pokemonName
-  );
+  modalContent.innerHTML = displayHTML(i, responseJSON, pokemonTypes, pokemonName);
   let typeContent = document.getElementById(`pokemonType${i}`);
   for (let j = 0; j < pokemonTypes.length; j++) {
     const type = pokemonTypes[j]["type"]["name"];
@@ -105,15 +95,13 @@ function renderPokemonInfo(i, responseJSON, pokemonTypes, pokemonName) {
 function displayHTML(i, responseJSON, pokemonTypes, pokemonName) {
   return /*html*/ `
  <div class="main_container">
-     <img class="icon left" src="./img/left.png" onclick= "previousCard(${i})"/>
+     <img class="icon left" id="arrow_left" src="./img/left.png" onclick= "previousCard(${i})"/>
      <div id="container" style="background-color:${
        colors[pokemonTypes[0].type.name]
      }">
          <h3 id="pokemonName">${responseJSON["name"]}</h3>
          <div class="img_container">
-             <img id="pokemon_img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${[
-               i,
-             ]}.svg">
+             <img id="pokemon_img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${[i]}.svg">
          </div>
          <div class="type_container">
          <p id="pokemonType${i}" class="pokemonType"></p>
@@ -148,13 +136,14 @@ function nextCard(i) {
 
 function previousCard(i) {
   if (i <= 1) {
-    displayBigCard(i);
+      document.getElementById('arrow_left').classList.add('d-none');
   } else {
-    displayBigCard([i - 1]);
+    displayBigCard(i - 1);
   }
 }
 
 async function loadMorePokemon() {
+    document.getElementById('gallery_content').innerHTML = '';
   for (let i = currentPokemonIndex + 1; i <= currentPokemonIndex + 20; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
@@ -171,6 +160,7 @@ function searchPokemon() {
   console.log(search);
 
   let searchPokemon = document.getElementsByClassName("pokemon_small_card");
+
   for (let i = 0; i < searchPokemon.length; i++) {
     let searchName = pokemonNames[i];
 
@@ -180,4 +170,10 @@ function searchPokemon() {
       searchPokemon[i].style.display = "none";
     }
   }
+}
+
+async function goToStart() {
+    document.getElementById('search').value = '';
+    document.getElementById('gallery_content').innerHTML = '';
+    await loadPokemonInfoCardSmall();
 }

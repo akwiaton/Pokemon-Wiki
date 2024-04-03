@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="./img/favicon.png">
     <title>Pokedex</title>
 </head>
 <body onload="init()">
-    <header>
-        <img class="pokedex_logo" src="./img/favicon.png">
+    <header onclick="goToStart()">
+        <div class="headline">
+            <img class="pokedex_logo" src="./img/favicon.png">
         <h1>Pokemon Wiki</h1>
-        <input name id="search" type="text" placeholder="z.B. Pikachu" onkeydown="searchPokemon()" >
+        <input name id="search" type="text" placeholder="z.B. Pikachu" onkeyup="searchPokemon()" >
+        </div>
     </header>
 
     <div id="search_container"></div>
