@@ -12,10 +12,10 @@
     <title>Pokedex</title>
 </head>
 <body onload="init()">
-    <header onclick="goToStart()">
+    <header>
         <div class="headline">
             <img class="pokedex_logo" src="./img/favicon.png">
-        <h1>Pokemon Wiki</h1>
+        <h1 onclick="goToStart()">Pokemon Wiki</h1>
         <input name id="search" type="text" placeholder="z.B. Pikachu" onkeyup="searchPokemon()" >
         </div>
     </header>

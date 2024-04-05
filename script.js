@@ -143,7 +143,6 @@ function previousCard(i) {
 }
 
 async function loadMorePokemon() {
-    document.getElementById('gallery_content').innerHTML = '';
   for (let i = currentPokemonIndex + 1; i <= currentPokemonIndex + 20; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
